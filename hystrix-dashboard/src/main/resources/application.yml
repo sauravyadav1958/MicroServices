@@ -5,9 +5,10 @@ spring:
   application:
     name: HYSTRIX-DASHBOARD
 
+# endpoints the Hystrix Dashboard is allowed to access
 hystrix:
   dashboard:
-    proxy-stream-allow-list: "*"   
+    proxy-stream-allow-list: "*"
     
 #eureka:
 #  client:

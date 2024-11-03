@@ -7,7 +7,7 @@ import org.springframework.cloud.netflix.hystrix.EnableHystrix;
 
 @SpringBootApplication
 @EnableEurekaClient
-@EnableHystrix
+@EnableHystrix // Allows to implement circuit breakers
 public class CloudGatewayApplication {
 
 	public static void main(String[] args) {

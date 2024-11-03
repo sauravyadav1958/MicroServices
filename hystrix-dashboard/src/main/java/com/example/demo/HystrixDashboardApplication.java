@@ -12,17 +12,10 @@ import org.springframework.web.client.RestTemplate;
 @SpringBootApplication
 @EnableHystrixDashboard
 @EnableEurekaClient
-//@EnableDiscoveryClient
 public class HystrixDashboardApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(HystrixDashboardApplication.class, args);
 	}
-	
-//	@LoadBalanced
-//    @Bean
-//    RestTemplate restTemplate() {
-//        return new RestTemplate();
-//    }
 
 }

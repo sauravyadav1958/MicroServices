@@ -1,0 +1,46 @@
+server:
+  port: 9191
+
+spring:
+  application:
+    name: API-GATEWAY
+  cloud:
+    gateway:
+      routes:
+        - id: USER-SERVICE
+#         lb = loadBalanced
+          uri: lb://USER-SERVICE
+          predicates:
+#          url pattern
+            - Path=/users/**
+          filters:
+#           prevent repeated failures by calling fallback method
+            - name: CircuitBreaker
+              args:
+                name: USER-SERVICE
+                fallbackuri: forward:/userServiceFallBack
+        - id: DEPARTMENT-SERVICE
+          uri: lb://DEPARTMENT-SERVICE
+          predicates:
+            - Path=/departments/**
+          filters:
+            - name: CircuitBreaker
+              args:
+                name: DEPARTMENT-SERVICE
+                fallbackuri: forward:/departmentServiceFallBack
+
+
+hystrix:
+  command:
+    fallbackcmd:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 4000
+
+# enables access to the Hystrix metrics stream which provides real-time data about how your application is performing
+management:
+  endpoints:
+    web:
+      exposure:
+        include: hystrix.stream
